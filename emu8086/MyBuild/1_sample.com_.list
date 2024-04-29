@@ -1,0 +1,107 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+1_sample.com_ -- emu8086 assembler version: 4.08  
+ 
+[ 4/15/2024  --  10:20:23 AM ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       org 0100h
+[   2]    0100: EB 08                                 .data
+[   3]    0102: 00 00 00 00 00                        digits db 5 dup(?)  ; Array to store input digits
+[   4]    0107: 00                                    average db ?
+[   5]    0108: 00                                    largest db ?
+[   6]    0109: 00                                    smallest db ?
+[   7]    010A:                                       .code
+[   8]    010A:                                       main proc
+[   9]    010A: 8C C8                                 mov ax, @data
+[  10]    010C: 8E D8                                 mov ds, ax
+[  11]        :                                       
+[  12]    010E: B9 05 00                              mov cx, 5 ; Set loop counter
+[  13]    0111: BE 02 01                              lea si, digits ; Point SI to the start of digits array
+[  14]        :                                       
+[  15]    0114:                                       input_loop:
+[  16]    0114: B4 01                                 mov ah, 01h ; Read character from keyboard
+[  17]    0116: CD 21                                 int 21h
+[  18]    0118: 2C 30                                 sub al, 30h ; Convert ASCII to decimal
+[  19]    011A: 88 04                                 mov [si], al ; Store digit in array
+[  20]    011C: 46                                    inc si
+[  21]    011D: E2 F5                                 loop input_loop
+[  22]        :                                       
+[  23]    011F: E8 0C 00                              call calculate_average
+[  24]    0122: E8 25 00                              call find_largest
+[  25]    0125: E8 39 00                              call find_smallest
+[  26]        :                                       
+[  27]    0128: B4 4C                                 mov ah, 4Ch
+[  28]    012A: B0 00                                 mov al, 00h
+[  29]    012C: CD 21                                 int 21h
+[  30]        :                                       main endp
+[  31]        :                                       
+[  32]    012E:                                       calculate_average proc
+[  33]    012E: B4 00                                 mov ah, 0
+[  34]    0130: B9 05 00                              mov cx, 5
+[  35]    0133: BE 02 01                              lea si, digits
+[  36]    0136: 33 DB                                 xor bx, bx
+[  37]        :                                       
+[  38]    0138:                                       average_loop:
+[  39]    0138: 8A 04                                 mov al, [si]
+[  40]    013A: 02 D8                                 add bl, al
+[  41]    013C: 46                                    inc si
+[  42]    013D: E2 F9                                 loop average_loop
+[  43]        :                                       
+[  44]    013F: 8A D3                                 mov dl, bl
+[  45]    0141: B1 05                                 mov cl, 5
+[  46]    0143: F6 F1                                 div cl
+[  47]    0145: 88 16 07 01                           mov average, dl
+[  48]    0149: C3                                    ret
+[  49]        :                                       calculate_average endp
+[  50]        :                                       
+[  51]    014A:                                       find_largest proc
+[  52]    014A: B4 00                                 mov ah, 0
+[  53]    014C: BE 02 01                              lea si, digits
+[  54]    014F: 8A 04                                 mov al, [si]
+[  55]    0151: 8A F8                                 mov bh, al
+[  56]        :                                       
+[  57]    0153:                                       largest_loop:
+[  58]    0153: 46                                    inc si
+[  59]    0154: 38 3C                                 cmp [si], bh
+[  60]    0156: 76 02                                 jbe skip_update
+[  61]    0158: 8A 3C                                 mov bh, [si]
+[  62]    015A:                                       skip_update:
+[  63]    015A: E2 F7                                 loop largest_loop
+[  64]        :                                       
+[  65]    015C: 88 3E 08 01                           mov largest, bh
+[  66]    0160: C3                                    ret
+[  67]        :                                       find_largest endp
+[  68]        :                                       
+[  69]    0161:                                       find_smallest proc
+[  70]    0161: B4 00                                 mov ah, 0
+[  71]    0163: BE 02 01                              lea si, digits
+[  72]    0166: 8A 04                                 mov al, [si]
+[  73]    0168: 8A F8                                 mov bh, al
+[  74]        :                                       
+[  75]    016A:                                       smallest_loop:
+[  76]    016A: 46                                    inc si
+[  77]    016B: 38 3C                                 cmp [si], bh
+[  78]    016D: 73 02                                 jae skip_smallest_loop
+[  79]    016F: 8A 3C                                 mov bh, [si]
+[  80]    0171:                                       skip_smallest_loop:
+[  81]    0171: E2 F7                                 loop smallest_loop
+[  82]        :                                       
+[  83]    0173: 88 3E 09 01                           mov smallest, bh
+[  84]    0177: C3                                    ret
+[  85]        :                                       find_smallest endp
+[  86]        :                                       
+[  87]        :                                       end main
+[  88]        :                                       
+[  89]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================

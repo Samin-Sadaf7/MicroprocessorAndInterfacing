@@ -1,0 +1,24 @@
+ORG 0100h
+
+.DATA
+result DW ?
+
+.CODE
+MAIN PROC
+MOV AX, 0BH
+MOV BX, 200
+SUB BX, 225
+
+MUL BX
+ADD AX, 127
+
+MOV result, AX
+
+MAIN ENDP
+END MAIN
+RET
+
+
+
+
+; [SOURCE]: C:\Users\Hp\OneDrive\Documents\Downloads\200042163_Task-2.asm

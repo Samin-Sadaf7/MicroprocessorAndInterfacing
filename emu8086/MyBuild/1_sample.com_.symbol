@@ -1,0 +1,23 @@
+< THE SYMBOL TABLE >  1_sample.com_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+DIGITS                   	00102     	1         	VAR       	(NOSEG)   
+AVERAGE                  	00107     	1         	VAR       	(NOSEG)   
+LARGEST                  	00108     	1         	VAR       	(NOSEG)   
+SMALLEST                 	00109     	1         	VAR       	(NOSEG)   
+CODE                     	0010A     	-1        	LABEL     	(NOSEG)   
+MAIN                     	0010A     	-1        	NEAR      	(NOSEG)   
+INPUT_LOOP               	00114     	-1        	LABEL     	(NOSEG)   
+CALCULATE_AVERAGE        	0012E     	-1        	NEAR      	(NOSEG)   
+AVERAGE_LOOP             	00138     	-1        	LABEL     	(NOSEG)   
+FIND_LARGEST             	0014A     	-1        	NEAR      	(NOSEG)   
+LARGEST_LOOP             	00153     	-1        	LABEL     	(NOSEG)   
+SKIP_UPDATE              	0015A     	-1        	LABEL     	(NOSEG)   
+FIND_SMALLEST            	00161     	-1        	NEAR      	(NOSEG)   
+SMALLEST_LOOP            	0016A     	-1        	LABEL     	(NOSEG)   
+SKIP_SMALLEST_LOOP       	00171     	-1        	LABEL     	(NOSEG)   
+===================================================================================================
+[ 4/15/2024  --  10:20:23 AM ] 
+< END >
+ 

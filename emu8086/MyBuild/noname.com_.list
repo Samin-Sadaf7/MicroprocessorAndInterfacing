@@ -1,0 +1,85 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+noname.com_ -- emu8086 assembler version: 4.08  
+ 
+[ 4/29/2024  --  10:10:14 AM ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       .ORG 0100h
+[   2]        :                                       .DATA
+[   3]    0100: 00                                    a DB 0
+[   4]        :                                       
+[   5]        :                                       
+[   6]        :                                       .CODE
+[   7]    0110:                                       MAIN PROC
+[   8]        :                                       
+[   9]        :                                       
+[  10]        :                                       ;Taking input from user
+[  11]        :                                       
+[  12]    0110: 33 F6                                 XOR SI, SI
+[  13]    0112: BE 00 00                              MOV SI, 0
+[  14]        :                                       
+[  15]    0115:                                       TAKE_INPUT:
+[  16]    0115: 83 FE 08                              CMP SI, 8
+[  17]    0118: 7D 0D                                 JGE INPUT_FINISH
+[  18]    011A: B4 01                                 MOV AH, 1
+[  19]    011C: CD 21                                 INT 21h
+[  20]    011E: 2C 30                                 SUB AL, 30h
+[  21]    0120: 88 04                                 MOV a[SI], AL
+[  22]    0122: 83 C6 01                              ADD SI, 1
+[  23]    0125: EB EE                                 JMP TAKE_INPUT
+[  24]        :                                       
+[  25]    0127:                                       INPUT_FINISH:
+[  26]    0127: 33 F6                                 XOR SI,SI
+[  27]    0129: 33 C9                                 XOR CX, CX
+[  28]    012B: BE 00 00                              MOV SI,0
+[  29]    012E: B9 00 00                              MOV CX,0
+[  30]    0131: 8A 1C                                 MOV BL, a[SI]
+[  31]        :                                       
+[  32]    0133: 83 FE 00                              CMP SI,0
+[  33]    0136: 74 14                                 JE  JMP_0
+[  34]    0138:                                       REV_SORT:
+[  35]    0138: 8B F1                                 MOV SI,CX
+[  36]    013A: 8A 14                                 MOV DL, a[SI]
+[  37]    013C: 88 1C                                 MOV a[SI],BL
+[  38]    013E: 8B F0                                 MOV SI, AX
+[  39]    0140: 88 14                                 MOV a[SI], DL
+[  40]    0142: B4 02                                 MOV AH, 2
+[  41]    0144: 8A D3                                 MOV DL, BL
+[  42]    0146: 80 C2 30                              ADD DL, 30h
+[  43]    0149: CD 21                                 INT 21h
+[  44]    014B: 41                                    INC CX
+[  45]    014C:                                       JMP_0:
+[  46]    014C: 83 F9 08                              CMP CX, 8
+[  47]    014F: 7D 16                                 JGE END_PROG
+[  48]    0151: 8B F1                                 MOV SI,CX
+[  49]    0153: 8A 1C                                 MOV BL,a[SI]
+[  50]        :                                       
+[  51]    0155:                                       FIND_BIG:
+[  52]    0155: 46                                    INC SI
+[  53]    0156: 83 FE 08                              CMP SI,8
+[  54]    0159: 7D DD                                 JGE REV_SORT
+[  55]    015B: 8A 14                                 MOV DL, a[SI]
+[  56]    015D: 3A DA                                 CMP BL, DL
+[  57]    015F: 7D F4                                 JGE FIND_BIG
+[  58]    0161: 8A DA                                 MOV BL, DL
+[  59]    0163: 8B C6                                 MOV AX, SI
+[  60]    0165: EB EE                                 JMP FIND_BIG
+[  61]        :                                       
+[  62]        :                                       
+[  63]    0167:                                       END_PROG:
+[  64]        :                                       MAIN ENDP
+[  65]        :                                       END MAIN
+[  66]        :                                       RET
+[  67]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================

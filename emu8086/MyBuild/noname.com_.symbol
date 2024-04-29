@@ -1,0 +1,18 @@
+< THE SYMBOL TABLE >  noname.com_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+DATA                     	00010     	-5        	SEGMENT   	(ITSELF)  
+A                        	00000     	1         	VAR       	data      
+CODE                     	00011     	-5        	SEGMENT   	(ITSELF)  
+MAIN                     	00000     	-1        	NEAR      	code      
+TAKE_INPUT               	00005     	-1        	LABEL     	code      
+INPUT_FINISH             	00017     	-1        	LABEL     	code      
+REV_SORT                 	00028     	-1        	LABEL     	code      
+JMP_0                    	0003C     	-1        	LABEL     	code      
+FIND_BIG                 	00045     	-1        	LABEL     	code      
+END_PROG                 	00057     	-1        	LABEL     	code      
+===================================================================================================
+[ 4/29/2024  --  10:10:14 AM ] 
+< END >
+ 

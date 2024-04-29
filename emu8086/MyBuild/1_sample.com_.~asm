@@ -1,0 +1,92 @@
+org 0100h
+.data
+digits db 5 dup(?)  ; Array to store input digits
+average db ?
+largest db ?
+smallest db ?
+.code
+main proc
+mov ax, @data
+mov ds, ax
+
+mov cx, 5 ; Set loop counter
+lea si, digits ; Point SI to the start of digits array
+
+input_loop:
+mov ah, 01h ; Read character from keyboard
+int 21h
+sub al, 30h ; Convert ASCII to decimal
+mov [si], al ; Store digit in array
+inc si
+loop input_loop
+
+call calculate_average
+call find_largest
+call find_smallest
+
+mov ah, 4Ch
+mov al, 00h
+int 21h
+main endp
+
+calculate_average proc
+mov ah, 0
+mov cx, 5
+lea si, digits
+xor bx, bx
+
+average_loop:
+mov al, [si]
+add bl, al
+inc si
+loop average_loop
+
+mov dl, bl
+mov cl, 5
+div cl
+mov average, dl
+ret
+calculate_average endp
+
+find_largest proc
+mov ah, 0
+lea si, digits
+mov al, [si]
+mov bh, al
+
+largest_loop:
+inc si
+cmp [si], bh
+jbe skip_update
+mov bh, [si]
+skip_update:
+loop largest_loop
+
+mov largest, bh
+ret
+find_largest endp
+
+find_smallest proc
+mov ah, 0
+lea si, digits
+mov al, [si]
+mov bh, al
+
+smallest_loop:
+inc si
+cmp [si], bh
+jae skip_smallest_loop
+mov bh, [si]
+skip_smallest_loop:
+loop smallest_loop
+
+mov smallest, bh
+ret
+find_smallest endp
+
+end main
+
+
+
+
+; [SOURCE]: D:\Microprocessor\emu8086\examples\1_sample.asm

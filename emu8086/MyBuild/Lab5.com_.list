@@ -1,0 +1,135 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+Lab5.com_ -- emu8086 assembler version: 4.08  
+ 
+[ 4/29/2024  --  12:50:12 AM ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       ORG 100h
+[   2]        :                                       
+[   3]    0100: E9 91 00                              .DATA
+[   4]    0103: 45 6E 74 65 72 20 35 20 64 65 63 69   MESSAGE DB 'Enter 5 decimal numbers(0~5): ','$'
+                6D 61 6C 20 6E 75 6D 62 65 72 73 28 
+                30 7E 35 29 3A 20 24                
+[   5]    0122: 54 68 65 20 6C 61 72 67 65 73 74 20   LARGEST_PROMPT DB 'The largest number entered is: $'
+                6E 75 6D 62 65 72 20 65 6E 74 65 72 
+                65 64 20 69 73 3A 20 24             
+[   6]    0142: 54 68 65 20 73 6D 61 6C 6C 65 73 74   SMALLEST_PROMPT DB 'The smallest number entered is: $'
+                20 6E 75 6D 62 65 72 20 65 6E 74 65 
+                72 65 64 20 69 73 3A 20 24          
+[   7]    0163: 54 68 65 20 61 76 65 72 61 67 65 20   AVERAGE_PROMPT DB 'The average number entered is: $'
+                6E 75 6D 62 65 72 20 65 6E 74 65 72 
+                65 64 20 69 73 3A 20 24             
+[   8]    0183: 54 68 65 20 73 75 6D 20 69 73 3A 20   AVERAGE_TEST DB 'The sum is: $'
+                24                                  
+[   9]        :                                       
+[  10]    0190: 00                                    NUM_LARGEST DB 0
+[  11]    0191: 09                                    NUM_SMALLEST DB 9
+[  12]    0192: 00                                    NUM_AVERAGE DB 0
+[  13]    0193: 05                                    NUM_OF_NUMBERS DB 5
+[  14]    0194:                                       .CODE
+[  15]    0194:                                       MAIN PROC
+[  16]    0194: 33 C9                                 XOR CX, CX
+[  17]    0196: 83 C1 05                              ADD CX, 5
+[  18]    0199: 32 FF                                 XOR BH, BH
+[  19]        :                                       ; Print the string
+[  20]    019B: B4 09                                 MOV AH, 9
+[  21]    019D: BA 03 01                              LEA DX, MESSAGE
+[  22]    01A0: CD 21                                 INT 21h
+[  23]        :                                       
+[  24]    01A2:                                       LOOP1:
+[  25]        :                                       ; Input a number
+[  26]    01A2: B4 01                                 MOV AH,1
+[  27]    01A4: CD 21                                 INT 21h
+[  28]        :                                       
+[  29]        :                                       ; Input saved to AL..save in BL
+[  30]    01A6: 8A D8                                 MOV BL, AL
+[  31]    01A8: 80 EB 30                              SUB BL, 48
+[  32]    01AB: E8 3F 00                              CALL LARGEST ; Value saved to NUM_LARGEST
+[  33]    01AE: E8 47 00                              CALL SMALLEST; Value saved to NUM_SMALLEST
+[  34]    01B1: E8 4F 00                              CALL CALCULATE_AVERAGE ;Value saved to NUM_AVERAGE
+[  35]        :                                       
+[  36]    01B4: E2 EC                                 LOOP LOOP1
+[  37]        :                                       
+[  38]        :                                       
+[  39]        :                                       ; Print the largest number in the prompt message
+[  40]    01B6: B4 09                                 MOV AH, 09h
+[  41]    01B8: BA 22 01                              LEA DX, LARGEST_PROMPT
+[  42]    01BB: CD 21                                 INT 21h
+[  43]        :                                       
+[  44]    01BD: 8A 16 90 01                           MOV DL, NUM_LARGEST ; Load the largest number into DL
+[  45]    01C1: 80 C2 30                              ADD DL, 48         ; Convert decimal number to ASCII character
+[  46]    01C4: B4 02                                 MOV AH, 02h         ; DOS function to print character
+[  47]    01C6: CD 21                                 INT 21h
+[  48]        :                                       
+[  49]        :                                       ; Print the smallest number in the prompt message
+[  50]    01C8: B4 09                                 MOV AH, 09h
+[  51]    01CA: BA 42 01                              LEA DX, SMALLEST_PROMPT
+[  52]    01CD: CD 21                                 INT 21h
+[  53]        :                                       
+[  54]    01CF: 8A 16 91 01                           MOV DL, NUM_SMALLEST
+[  55]    01D3: 80 C2 30                              ADD DL, 48
+[  56]    01D6: B4 02                                 MOV AH, 02h
+[  57]    01D8: CD 21                                 INT 21h
+[  58]        :                                       
+[  59]        :                                       ; Print the average number in the prompt message
+[  60]    01DA: B4 09                                 MOV AH, 09h
+[  61]    01DC: BA 63 01                              LEA DX, AVERAGE_PROMPT
+[  62]    01DF: CD 21                                 INT 21h
+[  63]        :                                       
+[  64]    01E1: 8A 16 92 01                           MOV DL, NUM_AVERAGE
+[  65]    01E5: 80 C2 30                              ADD DL, 48
+[  66]    01E8: B4 02                                 MOV AH, 02h
+[  67]    01EA: CD 21                                 INT 21h
+[  68]        :                                       
+[  69]    01EC: F4                                    HLT
+[  70]        :                                       MAIN ENDP
+[  71]        :                                       
+[  72]        :                                       
+[  73]    01ED:                                       LARGEST PROC
+[  74]    01ED: 3A 1E 90 01                           CMP BL, NUM_LARGEST
+[  75]    01F1: 7E 04                                 JLE LARG_LABEL
+[  76]    01F3: 88 1E 90 01                           MOV NUM_LARGEST, BL
+[  77]        :                                       
+[  78]    01F7:                                       LARG_LABEL:
+[  79]    01F7: C3                                    RET
+[  80]        :                                       LARGEST ENDP
+[  81]        :                                       
+[  82]    01F8:                                       SMALLEST PROC
+[  83]    01F8: 3A 1E 91 01                           CMP BL, NUM_SMALLEST
+[  84]    01FC: 7D 04                                 JGE SMALL_LABEL
+[  85]    01FE: 88 1E 91 01                           MOV NUM_SMALLEST, BL
+[  86]    0202:                                       SMALL_LABEL:
+[  87]    0202: C3                                    RET
+[  88]        :                                       SMALLEST ENDP
+[  89]        :                                       
+[  90]    0203:                                       CALCULATE_AVERAGE PROC
+[  91]    0203: 02 FB                                 ADD BH, BL
+[  92]    0205: 83 F9 01                              CMP CX, 1
+[  93]    0208: 75 0F                                 JNE AVG_LABEL
+[  94]    020A: 33 C0                                 XOR AX, AX
+[  95]    020C: 8A C7                                 MOV AL, BH
+[  96]    020E: B7 05                                 MOV BH, 5
+[  97]    0210: F6 F7                                 DIV BH   ; Divide AX register with BH
+[  98]    0212: 8A F8                                 MOV BH, AL
+[  99]    0214: 88 3E 92 01                           MOV NUM_AVERAGE, BH
+[ 100]    0218: C3                                    RET
+[ 101]    0219:                                       AVG_LABEL:
+[ 102]    0219: C3                                    RET
+[ 103]        :                                       CALCULATE_AVERAGE ENDP
+[ 104]        :                                       
+[ 105]        :                                       END MAIN
+[ 106]        :                                       RET
+[ 107]        :                                       
+[ 108]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================

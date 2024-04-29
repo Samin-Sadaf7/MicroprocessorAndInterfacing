@@ -1,0 +1,23 @@
+< THE SYMBOL TABLE >  200042163_Lab2_task2.com_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+CODE                     	00102     	-1        	LABEL     	(NOSEG)   
+MAIN                     	00102     	-1        	NEAR      	(NOSEG)   
+GET_TO_FRONT_UPPER       	00102     	-1        	LABEL     	(NOSEG)   
+GET_TO_FRONT_LOWER       	0010A     	-1        	LABEL     	(NOSEG)   
+GET_TO_BACK_UPPER        	00112     	-1        	LABEL     	(NOSEG)   
+GET_TO_BACK_LOWER        	0011A     	-1        	LABEL     	(NOSEG)   
+UPPERCASE_TO_LOWERCASE   	0013D     	-1        	LABEL     	(NOSEG)   
+LOWERCASE_TO_UPPERCASE   	00146     	-1        	LABEL     	(NOSEG)   
+COMPLETE_EXECUTION_LOWER 	00149     	-1        	LABEL     	(NOSEG)   
+LOOP_FORWARD             	0014C     	-1        	LABEL     	(NOSEG)   
+LOOP_BACKWARD            	00172     	-1        	LABEL     	(NOSEG)   
+COMPLETE_EXECUTION_UPPER 	0018D     	-1        	LABEL     	(NOSEG)   
+LOOP_FORWARD_UPPER       	00190     	-1        	LABEL     	(NOSEG)   
+LOOP_BACKWARD_UPPER      	001B9     	-1        	LABEL     	(NOSEG)   
+EXIT                     	001D7     	-1        	LABEL     	(NOSEG)   
+===================================================================================================
+[ 3/2/2024  --  7:05:37 PM ] 
+< END >
+ 

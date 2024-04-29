@@ -1,0 +1,179 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+200042163_Lab2_task2.com_ -- emu8086 assembler version: 4.08  
+ 
+[ 3/2/2024  --  7:05:37 PM ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       org 100h
+[   2]        :                                       
+[   3]    0100: EB 00                                 .data
+[   4]        :                                       
+[   5]        :                                       
+[   6]    0102:                                       .code
+[   7]    0102:                                       main proc
+[   8]        :                                       
+[   9]    0102:                                       get_to_front_upper:
+[  10]    0102: 80 EB 1B                              sub bl,27
+[  11]    0105: 80 FB 00                              cmp bl,0
+[  12]    0108: 7F 42                                 jg loop_forward
+[  13]        :                                       
+[  14]        :                                       
+[  15]    010A:                                       get_to_front_lower:
+[  16]    010A: 80 EB 1B                              sub bl,27
+[  17]    010D: 80 FB 00                              cmp bl,0
+[  18]    0110: 7F 7E                                 jg loop_forward_upper
+[  19]        :                                       
+[  20]    0112:                                       get_to_back_upper:
+[  21]    0112: 80 C3 1B                              add bl,27
+[  22]    0115: 80 FB 00                              cmp bl,0
+[  23]    0118: 7F 58                                 jg loop_backward
+[  24]        :                                       
+[  25]        :                                       
+[  26]    011A:                                       get_to_back_lower:
+[  27]    011A: 80 C3 1B                              add bl,27
+[  28]    011D: 80 FB 00                              cmp bl,0
+[  29]    0120: 7E 03 E9 94 00                        jg loop_backward_upper
+[  30]        :                                       
+[  31]        :                                       ;flush bx
+[  32]    0125: BB 00 00                              mov bx,0
+[  33]        :                                       
+[  34]        :                                       ;input a character
+[  35]    0128: B4 01                                 mov ah,1
+[  36]    012A: CD 21                                 int 21h
+[  37]    012C: 8A D8                                 mov bl,al
+[  38]        :                                       
+[  39]        :                                       ;provide a new line:
+[  40]    012E: B4 02                                 mov ah,2
+[  41]    0130: B2 0D                                 mov dl,0dh
+[  42]    0132: CD 21                                 int 21h
+[  43]    0134: B2 0A                                 mov dl,0ah
+[  44]    0136: CD 21                                 int 21h
+[  45]        :                                       
+[  46]        :                                       ;compare upper or lower
+[  47]    0138: 80 FB 61                              cmp bl,97
+[  48]    013B: 7D 09                                 jge lowercase_to_uppercase
+[  49]        :                                       
+[  50]        :                                       ;define uppercase_to_lowercase
+[  51]    013D:                                       uppercase_to_lowercase:
+[  52]    013D: 80 C3 20                              add bl,32
+[  53]        :                                       ;10 will always be greated than 5. So this condition will make it jump to complete_execution branch
+[  54]    0140: B0 0A                                 mov al,10
+[  55]    0142: 3C 05                                 cmp al,5
+[  56]    0144: 7D 47                                 jge complete_execution_upper
+[  57]        :                                       
+[  58]        :                                       ;define lowercase_to_uppercase
+[  59]    0146:                                       lowercase_to_uppercase:
+[  60]    0146: 80 EB 20                              sub bl,32
+[  61]        :                                       
+[  62]        :                                       
+[  63]        :                                       ;check for lower_case letters as input
+[  64]    0149:                                       complete_execution_lower:
+[  65]        :                                       ;move forward
+[  66]    0149: B9 00 00                              mov cx,0
+[  67]    014C:                                       loop_Forward:
+[  68]    014C: 80 C3 01                              add bl,1
+[  69]        :                                       
+[  70]    014F: 80 FB 5A                              cmp bl,90
+[  71]    0152: 7F AE                                 jg get_to_front_upper
+[  72]        :                                       
+[  73]    0154: 8A D3                                 mov dl,bl
+[  74]    0156: B4 02                                 mov ah,2
+[  75]    0158: CD 21                                 int 21h
+[  76]    015A: 80 C1 01                              add cl,1
+[  77]    015D: 80 F9 05                              cmp cl,5
+[  78]    0160: 7C EA                                 jl loop_forward
+[  79]        :                                       
+[  80]        :                                       ;add a new line
+[  81]    0162: B4 02                                 mov ah,2
+[  82]    0164: B2 0D                                 mov dl,0dh
+[  83]    0166: CD 21                                 int 21h
+[  84]    0168: B2 0A                                 mov dl,0ah
+[  85]    016A: CD 21                                 int 21h
+[  86]        :                                       
+[  87]        :                                       
+[  88]        :                                       ;move backward
+[  89]    016C: B9 00 00                              mov cx,0
+[  90]    016F: 80 EB 05                              sub bl,5
+[  91]    0172:                                       loop_backward:
+[  92]    0172: 80 EB 01                              sub bl,1
+[  93]        :                                       
+[  94]    0175: 80 FB 41                              cmp bl,65
+[  95]    0178: 7C 98                                 jl get_to_back_upper
+[  96]        :                                       
+[  97]    017A: 8A D3                                 mov dl,bl
+[  98]    017C: B4 02                                 mov ah,2
+[  99]    017E: CD 21                                 int 21h
+[ 100]    0180: 80 C1 01                              add cl,1
+[ 101]    0183: 80 F9 05                              cmp cl,5
+[ 102]    0186: 7C EA                                 jl loop_backward
+[ 103]    0188: 80 FB 00                              cmp bl,0
+[ 104]    018B: 7F 4A                                 jg exit
+[ 105]        :                                       
+[ 106]        :                                       
+[ 107]        :                                       ;check for upper_case letters as input
+[ 108]    018D:                                       complete_execution_upper:
+[ 109]        :                                       ;move forward
+[ 110]    018D: B9 00 00                              mov cx,0
+[ 111]    0190:                                       loop_Forward_upper:
+[ 112]    0190: 80 C3 01                              add bl,1
+[ 113]        :                                       
+[ 114]    0193: 80 FB 7A                              cmp bl,122
+[ 115]    0196: 7E 03 E9 6F FF                        jg get_to_front_lower
+[ 116]        :                                       
+[ 117]    019B: 8A D3                                 mov dl,bl
+[ 118]    019D: B4 02                                 mov ah,2
+[ 119]    019F: CD 21                                 int 21h
+[ 120]    01A1: 80 C1 01                              add cl,1
+[ 121]    01A4: 80 F9 05                              cmp cl,5
+[ 122]    01A7: 7C E7                                 jl loop_forward_upper
+[ 123]        :                                       
+[ 124]        :                                       ;add a new line
+[ 125]    01A9: B4 02                                 mov ah,2
+[ 126]    01AB: B2 0D                                 mov dl,0dh
+[ 127]    01AD: CD 21                                 int 21h
+[ 128]    01AF: B2 0A                                 mov dl,0ah
+[ 129]    01B1: CD 21                                 int 21h
+[ 130]        :                                       
+[ 131]        :                                       
+[ 132]        :                                       ;move backward
+[ 133]    01B3: B9 00 00                              mov cx,0
+[ 134]    01B6: 80 EB 05                              sub bl,5
+[ 135]    01B9:                                       loop_backward_upper:
+[ 136]    01B9: 80 EB 01                              sub bl,1
+[ 137]        :                                       
+[ 138]    01BC: 80 FB 61                              cmp bl,97
+[ 139]    01BF: 7D 03 E9 56 FF                        jl get_to_back_lower
+[ 140]        :                                       
+[ 141]    01C4: 8A D3                                 mov dl,bl
+[ 142]    01C6: B4 02                                 mov ah,2
+[ 143]    01C8: CD 21                                 int 21h
+[ 144]    01CA: 80 C1 01                              add cl,1
+[ 145]    01CD: 80 F9 05                              cmp cl,5
+[ 146]    01D0: 7C E7                                 jl loop_backward_upper
+[ 147]    01D2: 80 FB 00                              cmp bl,0
+[ 148]    01D5: 7F 00                                 jg exit
+[ 149]        :                                       
+[ 150]        :                                       ;Return to DOS
+[ 151]    01D7:                                       exit:
+[ 152]    01D7: B4 4C                                 mov ah,4ch
+[ 153]    01D9: CD 21                                 int 21h
+[ 154]        :                                       
+[ 155]    01DB: F4                                    hlt
+[ 156]        :                                       
+[ 157]        :                                       
+[ 158]        :                                       main endp
+[ 159]        :                                       end main
+[ 160]        :                                       ret
+[ 161]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================

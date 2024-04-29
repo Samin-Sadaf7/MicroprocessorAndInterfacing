@@ -1,0 +1,26 @@
+< THE SYMBOL TABLE >  Lab5.com_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+MESSAGE                  	00103     	1         	VAR       	(NOSEG)   
+LARGEST_PROMPT           	00122     	1         	VAR       	(NOSEG)   
+SMALLEST_PROMPT          	00142     	1         	VAR       	(NOSEG)   
+AVERAGE_PROMPT           	00163     	1         	VAR       	(NOSEG)   
+AVERAGE_TEST             	00183     	1         	VAR       	(NOSEG)   
+NUM_LARGEST              	00190     	1         	VAR       	(NOSEG)   
+NUM_SMALLEST             	00191     	1         	VAR       	(NOSEG)   
+NUM_AVERAGE              	00192     	1         	VAR       	(NOSEG)   
+NUM_OF_NUMBERS           	00193     	1         	VAR       	(NOSEG)   
+CODE                     	00194     	-1        	LABEL     	(NOSEG)   
+MAIN                     	00194     	-1        	NEAR      	(NOSEG)   
+LOOP1                    	001A2     	-1        	LABEL     	(NOSEG)   
+LARGEST                  	001ED     	-1        	NEAR      	(NOSEG)   
+LARG_LABEL               	001F7     	-1        	LABEL     	(NOSEG)   
+SMALLEST                 	001F8     	-1        	NEAR      	(NOSEG)   
+SMALL_LABEL              	00202     	-1        	LABEL     	(NOSEG)   
+CALCULATE_AVERAGE        	00203     	-1        	NEAR      	(NOSEG)   
+AVG_LABEL                	00219     	-1        	LABEL     	(NOSEG)   
+===================================================================================================
+[ 4/29/2024  --  12:50:12 AM ] 
+< END >
+ 

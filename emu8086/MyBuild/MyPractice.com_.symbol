@@ -1,0 +1,20 @@
+< THE SYMBOL TABLE >  MyPractice.com_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+A                        	00102     	2         	VAR       	(NOSEG)   
+B                        	00104     	2         	VAR       	(NOSEG)   
+C                        	00106     	2         	VAR       	(NOSEG)   
+D                        	00108     	2         	VAR       	(NOSEG)   
+E                        	0010A     	2         	VAR       	(NOSEG)   
+F                        	0010C     	2         	VAR       	(NOSEG)   
+PROMPT                   	0010E     	1         	VAR       	(NOSEG)   
+ANS                      	0012D     	2         	VAR       	(NOSEG)   
+CODE                     	0012F     	-1        	LABEL     	(NOSEG)   
+MAIN                     	0012F     	-1        	NEAR      	(NOSEG)   
+LOOP_1                   	00142     	-1        	LABEL     	(NOSEG)   
+END_PROG                 	0014D     	-1        	LABEL     	(NOSEG)   
+===================================================================================================
+[ 4/29/2024  --  12:41:22 AM ] 
+< END >
+ 
